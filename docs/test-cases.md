@@ -1,6 +1,6 @@
 # Dream Portal test cases
 
-The tests cover the home page, diary, summary page, and the optional Qwen check.
+The main tests cover the home page, diary, and summary page. The Qwen check is an optional experiment and needs an external API key.
 
 ## 1. Home page
 
@@ -60,10 +60,10 @@ Count repeated names in the diary and compare them with the summary.
 
 Expected: the repeated names are `Flying over mountains` and `Lost in maze`.
 
-## 4. Bonus AI check
+## 4. Optional experimental AI check
 
 ### TC-AI-001 - Dream type classification
 
-Send each unique diary title to the Qwen model through OpenRouter and compare the result with the table type.
+If `OPENROUTER_API_KEY` is available, send each unique diary title to the Qwen model through OpenRouter and compare the result with the table type. This check is separate from the normal browser coverage and can be slower or unavailable when the external API cannot be reached.
 
 Expected: the model returns `Good` or `Bad`, and its result matches the diary for every title.
