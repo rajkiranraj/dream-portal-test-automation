@@ -23,7 +23,6 @@ test('summary counts match the diary, including the two recurring dreams', async
   expect(stats['Total Dreams']).toBe(10);
   expect(stats['Recurring Dreams']).toBe(2);
 
-  // same numbers, worked out from the diary rather than typed twice
   expect(stats['Good Dreams']).toBe(good);
   expect(stats['Bad Dreams']).toBe(bad);
   expect(stats['Total Dreams']).toBe(entries.length);

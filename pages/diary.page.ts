@@ -27,7 +27,6 @@ export class DiaryPage {
     return cells.map(([name = '', daysAgo = '', type = '']) => ({ name, daysAgo, type }));
   }
 
-  // summary page says these are "recurring". counted here so we don't trust that page blindly.
   recurringNames(entries: DreamRow[]) {
     const counts: Record<string, number> = {};
     for (const entry of entries) {

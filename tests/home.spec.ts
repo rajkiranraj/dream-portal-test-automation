@@ -10,8 +10,6 @@ test('loader clears in about 3s, then My Dreams opens both pages', async ({ page
   await expect(home.myDreams).toBeHidden();
 
   const waitedMs = await home.waitForPortal();
-  // 3000ms in their script. wide enough that a slow page load doesn't fail it,
-  // tight enough that a missing timer would.
   expect(waitedMs).toBeGreaterThan(2000);
   expect(waitedMs).toBeLessThan(5000);
 

@@ -1,19 +1,13 @@
-import fs from 'fs';
-
-// playwright doesn't load .env. kept the config comment as-is and read it here.
 export function qwenKey() {
-  if (process.env.OPENROUTER_API_KEY) return process.env.OPENROUTER_API_KEY.trim();
-  if (!fs.existsSync('.env')) return '';
+  if (!process.env.OPENROUTER_API_KEY) {
+    try {
+      process.loadEnvFile('.env');
+    } catch {}
+  }
 
-  const line = fs
-    .readFileSync('.env', 'utf8')
-    .split('\n')
-    .find((row) => row.startsWith('OPENROUTER_API_KEY='));
-
-  return line ? line.slice('OPENROUTER_API_KEY='.length).trim() : '';
+  return process.env.OPENROUTER_API_KEY?.trim() ?? '';
 }
 
-// we only keep Good or Bad, the model sometimes adds a full stop.
 export async function classifyDream(name: string) {
   const apiKey = qwenKey();
   if (!apiKey) throw new Error('OPENROUTER_API_KEY is not set');

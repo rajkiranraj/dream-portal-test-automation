@@ -10,7 +10,6 @@ test('qwen labels match the type in the diary', async ({ page }) => {
   await diary.open();
   const entries = await diary.entries();
 
-  // titles repeat. one call per title.
   const seen = new Map<string, string>();
   for (const entry of entries) {
     const previous = seen.get(entry.name);

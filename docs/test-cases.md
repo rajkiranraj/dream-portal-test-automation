@@ -1,116 +1,69 @@
-# Dream Portal — Test Scenarios
+# Dream Portal test cases
 
-## Scope
+The tests cover the home page, diary, summary page, and the optional Qwen check.
 
-Functional coverage for the Dream Portal user flow, including the home page, dream diary, and summary page.
+## 1. Home page
 
-The main focus is on the behavior and data checks mentioned in the assignment.
+### TC-HOME-001 - Loading state
 
----
+1. Open `index.html`.
+2. Check the page before the timer finishes.
+3. Wait for the loading animation to disappear.
 
-## Home Page
+Expected: the loader is visible first, then the main content is shown after about three seconds.
 
-### TC-HOME-001 — Check loading state
+### TC-HOME-002 - Home page controls
 
-Load the Dream Portal and observe the initial loading state.
+Open the page after loading and check the dream count, day count, page heading, and `My Dreams` button.
 
-**Expected:**
-The loading animation is shown while the page is loading and disappears once the page is ready.
+Expected: the values are displayed and the button can be clicked.
 
-### TC-HOME-002 — Check home page after loading
+### TC-HOME-003 - My Dreams links
 
-Wait for the loading state to finish and verify that the main page content is available.
+Click `My Dreams` and check the tabs/windows opened by the page.
 
-**Expected:**
-The main Dream Portal content is displayed and can be interacted with.
+Expected:
 
-### TC-HOME-003 — Check home page details
+1. One page opens `dreams-diary.html`.
+2. One page opens `dreams-total.html`.
 
-Verify the information presented on the home page.
+## 2. Dreams diary
 
-**Expected:**
+### TC-DIARY-001 - Number of rows
 
-* Dream count is displayed.
-* Day count is displayed.
-* `My Dreams` button is visible and available for interaction.
+Open `dreams-diary.html` and count the table rows.
 
-### TC-HOME-004 — Check My Dreams navigation
+Expected: there are exactly 10 dreams.
 
-Click `My Dreams` and verify the pages opened by the application.
+### TC-DIARY-002 - Row values
 
-**Expected:**
-Two pages are opened:
+Read each row and check the three columns: Dream Name, Days Ago, and Dream Type.
 
-* `dreams-diary.html`
-* `dreams-total.html`
+Expected: no cell is blank and the type is either `Good` or `Bad`.
 
----
+## 3. Dreams summary
 
-## Dreams Diary
+### TC-SUMMARY-001 - Summary totals
 
-### TC-DIARY-001 — Check number of dream entries
+Open `dreams-total.html` and compare the displayed values with the diary.
 
-Open the Dream Diary and count the entries in the table.
+Expected:
 
-**Expected:**
-Exactly 10 dream entries are present.
+1. Good Dreams: `6`
+2. Bad Dreams: `4`
+3. Total Dreams: `10`
+4. Recurring Dreams: `2`
 
-### TC-DIARY-002 — Validate dream types
+### TC-SUMMARY-002 - Recurring dreams
 
-Check the value shown in the Dream Type column for every entry.
+Count repeated names in the diary and compare them with the summary.
 
-**Expected:**
-Each entry has a valid dream type: `Good` or `Bad`.
+Expected: the repeated names are `Flying over mountains` and `Lost in maze`.
 
-### TC-DIARY-003 — Check required row data
+## 4. Bonus AI check
 
-Verify that each dream row contains all the expected information.
+### TC-AI-001 - Dream type classification
 
-**Expected:**
-Every row has values for:
+Send each unique diary title to the Qwen model through OpenRouter and compare the result with the table type.
 
-* Dream Name
-* Days Ago
-* Dream Type
-
----
-
-## Dreams Summary
-
-### TC-SUMMARY-001 — Check Good Dreams count
-
-Verify the Good Dreams value on the summary page.
-
-**Expected:**
-`Good Dreams = 6`
-
-### TC-SUMMARY-002 — Check Bad Dreams count
-
-Verify the Bad Dreams value on the summary page.
-
-**Expected:**
-`Bad Dreams = 4`
-
-### TC-SUMMARY-003 — Check total dream count
-
-Verify the overall dream count.
-
-**Expected:**
-`Total Dreams = 10`
-
-### TC-SUMMARY-004 — Check recurring dream count
-
-Verify the number of recurring dreams shown in the summary.
-
-**Expected:**
-`Recurring Dreams = 2`
-
-### TC-SUMMARY-005 — Verify recurring dream identification
-
-Cross-check the dream names in the diary with the recurring-dream result shown in the summary.
-
-**Expected:**
-The recurring dreams are:
-
-* `Flying over mountains`
-* `Lost in maze`
+Expected: the model returns `Good` or `Bad`, and its result matches the diary for every title.
