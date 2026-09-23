@@ -1,0 +1,7 @@
+{
+  "workbench.colorCustomizations": {
+    "terminal.background": "#00000000",
+    "minimap.background": "#000000AA",
+    "scrollbar.shadow": "#000000AA"
+  }
+}
